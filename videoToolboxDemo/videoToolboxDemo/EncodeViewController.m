@@ -13,7 +13,7 @@
  https://www.jianshu.com/p/eccdcf43d7d2 参考文章
  */
 
-@interface EncodeViewController ()
+@interface EncodeViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate>
 @property(nonatomic, strong)AVCaptureSession *captureSession;
 @property(nonatomic, strong)AVCaptureDeviceInput *captureDeviceInput;
 @property(nonatomic, strong)AVCaptureVideoDataOutput *captureVideoDataOutput;
@@ -111,8 +111,37 @@
     //设置展示的视频方向
     self.videoPreviewLayer.connection.videoOrientation = self.captureConnection.videoOrientation;
     self.videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    [self.view.layer addSublayer:self.videoPreviewLayer];
+    [self startCapture];
 }
-
+//上面的是所有的准备工作做好了，接下来就是开始采集了
+-(BOOL)startCapture
+{
+    //先判断一下摄像头的权限
+    AVAuthorizationStatus videoAuthStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (videoAuthStatus != AVAuthorizationStatusAuthorized)
+    {
+        return NO;
+    }
+    [self.captureSession startRunning];
+    return YES;
+}
+#pragma mark AVCaptureVideoDataOutputSampleBufferDelegate
+/**
+ 摄像头采集的数据回调
+ @param output 输出设备
+ @param sampleBuffer 帧缓存数据，描述当前帧信息
+ @param connection 连接
+ */
+-(void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(nonnull CMSampleBufferRef)sampleBuffer fromConnection:(nonnull AVCaptureConnection *)connection
+{
+    //这里就要对采集到的数据进行编码了
+    [self videoDataEncode:sampleBuffer];
+}
+-(void)videoDataEncode:(CMSampleBufferRef)sampleBuffer
+{
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

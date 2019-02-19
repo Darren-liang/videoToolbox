@@ -445,14 +445,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 436R9GKLUT;
 				INFOPLIST_FILE = videoToolboxDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lwd.fps.videoToolboxDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.didapinche.taxi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0c5cb14b-12af-4200-94ca-061c04a2284a";
+				PROVISIONING_PROFILE_SPECIFIER = "iOS Development: taxi";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -461,14 +464,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 436R9GKLUT;
 				INFOPLIST_FILE = videoToolboxDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lwd.fps.videoToolboxDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.didapinche.taxi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0c5cb14b-12af-4200-94ca-061c04a2284a";
+				PROVISIONING_PROFILE_SPECIFIER = "iOS Development: taxi";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

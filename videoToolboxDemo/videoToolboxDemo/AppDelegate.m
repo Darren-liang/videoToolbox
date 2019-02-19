@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "EncodeViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    EncodeViewController *encodevc = [[EncodeViewController alloc] init];
+    self.window.rootViewController = encodevc;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
