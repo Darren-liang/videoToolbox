@@ -12,6 +12,7 @@
 
 /**
  https://www.jianshu.com/p/eccdcf43d7d2 参考文章
+ https://www.jianshu.com/p/7a38378a7a1c?utm_campaign=hugo&utm_medium=reader_share&utm_content=note&utm_source=weixin-friends 这是cc老师的音视频文章
  */
 
 @interface EncodeViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate>
@@ -336,9 +337,6 @@ void didCompressH264(void *outputCallbackRefCon,
      因为VideoToolBox编码器在每一个关键帧前面都会输出SPS/PPS信息.所以如果本帧是关键帧,则可以取出对应的SPS/PPS信息.
      */
     EncodeViewController *codevc = (__bridge EncodeViewController*)(outputCallbackRefCon);
-    const char header[] = "\x00\x00\x00\x01";
-    size_t headerLen = (sizeof header) - 1;
-    NSData *headerData = [NSData dataWithBytes:header length:headerLen];
     
     CFArrayRef arrayRef = CMSampleBufferGetSampleAttachmentsArray(sampleBuffer, true);
     CFDictionaryRef theDict = (CFDictionaryRef)CFArrayGetValueAtIndex(arrayRef, 0);
