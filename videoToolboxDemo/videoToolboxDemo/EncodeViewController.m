@@ -296,7 +296,7 @@
     {
         NSLog(@"编码的时候出问题了兄弟:%d", (int)statusCode);
         VTCompressionSessionInvalidate(self.cEncodeingSession);
-//        CFRelease(self.cEncodeingSession);
+//        CFRelease(self.cEncodeing Session);
         self.cEncodeingSession = NULL;
         return;
     }
