@@ -303,6 +303,8 @@
     NSLog(@"编码成功");
     
 }
+
+//下面这个函数是当第5步编码成功之后，就会回调到这里
 /** 编码数据处理-获取SPS/PPS
  当编码成功后,就会回调到最开始初始化编码器会话时传入的回调函数,回调函数的原型如下: */
 void didCompressH264(void *outputCallbackRefCon,
@@ -331,7 +333,7 @@ void didCompressH264(void *outputCallbackRefCon,
     //2.判断是否关键帧
     /**
      为什么要判断关键帧呢?
-     因为VideoToolBox编码器在每一个关键帧前面都会输出SPS/PPS信息.所以如果本帧未关键帧,则可以取出对应的SPS/PPS信息.
+     因为VideoToolBox编码器在每一个关键帧前面都会输出SPS/PPS信息.所以如果本帧是关键帧,则可以取出对应的SPS/PPS信息.
      */
     EncodeViewController *codevc = (__bridge EncodeViewController*)(outputCallbackRefCon);
     const char header[] = "\x00\x00\x00\x01";
@@ -456,6 +458,17 @@ void didCompressH264(void *outputCallbackRefCon,
         [self.fileHandele writeData:data];
     }
 }
-
+- (void)dealloc
+{
+    NSLog(@"%s", __func__);
+    if (NULL == self.cEncodeingSession)
+    {
+        return;
+    }
+    VTCompressionSessionCompleteFrames(self.cEncodeingSession, kCMTimeInvalid);
+    VTCompressionSessionInvalidate(self.cEncodeingSession);
+//    CFRelease(_compressionSessionRef);
+    self.cEncodeingSession = NULL;
+}
 @end
 
